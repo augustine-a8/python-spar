@@ -44,19 +44,25 @@ class Spar:
             self.deal_hands_to_player(player)
         
         random.shuffle(self.players)
-        player_one = self.players[0]
-        player_two = self.players[1]
+        starting_player = self.players[0]
+        next_player = self.players[1]
 
-        while not player_one.hand_is_empty() and not player_two.hand_is_empty():
-            print(f"{player_one.name}'s turn")
-            p1_card = player_one.play_card()
-            print(f"{player_two.name}'s turn")
-            p2_card = player_two.play_card()
+        while not starting_player.hand_is_empty() and not next_player.hand_is_empty():
+            print(f"{starting_player.name}'s turn")
+            p1_card = starting_player.play_card()
+            print(f"{next_player.name}'s turn")
+            p2_card = next_player.play_card()
             trick_winner = self.__compare_cards(p1_card, p2_card)
             if trick_winner == 1:
-                print(f"{player_one.name} won turn with {p1_card[1]} of {p1_card[0]}")
+                print(f"{starting_player.name} won turn with {p1_card[1]} of {p1_card[0]}")
             else:
-                print(f"{player_two.name} won turn with {p2_card[1]} of {p2_card[0]}")
+                print(f"{next_player.name} won turn with {p2_card[1]} of {p2_card[0]}")
+                temp = starting_player
+                starting_player = next_player
+                next_player = temp
+        
+        print(f"{starting_player.name} WON SET")
+        print(f"GAME OVER!!")
 
     def __compare_cards(self, card_one, card_two):
         if card_one[0] == card_two[0]:
