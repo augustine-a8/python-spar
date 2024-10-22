@@ -16,10 +16,9 @@ class Spar:
     def __repr__(self):
         if len(self.deck_of_cards) == 0:
             raise Exception("No cards")
-        str_rep = []
+        str = ""
         for i in range(0, len(self.deck_of_cards)):
             card = self.deck_of_cards[i]
-            str_rep.append(f"{i+1}. {card[0]} of {card[1]}")
-        str = '\n'.join(str_rep)
+            str += f"{i+1}. {card[0]} of {card[1]}\n"
         return str
         
