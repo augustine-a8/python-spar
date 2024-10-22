@@ -1,6 +1,7 @@
 from constants import SUITS, RANKS, CPU_PLAYER_NAME
-from format_text import border_text
+from format_text import border_text, underline_text
 from player import Player
+from cpu import CpuPlayer
 import random
 
 class Spar:
@@ -38,7 +39,7 @@ class Spar:
         name = input("Enter player name: ")
         player = Player(name)
         self.players.append(player)
-        cpu = Player(CPU_PLAYER_NAME)
+        cpu = CpuPlayer()
         self.players.append(cpu)
 
         for player in self.players:
@@ -49,9 +50,9 @@ class Spar:
         next_player = self.players[1]
 
         while not starting_player.hand_is_empty() and not next_player.hand_is_empty():
-            print(f"{starting_player.name}'s turn")
+            print(underline_text(f"{starting_player.name}'s turn", 75))
             p1_card = starting_player.play_card()
-            print(f"{next_player.name}'s turn")
+            print(underline_text(f"{next_player.name}'s turn", 75))
             p2_card = next_player.play_card()
             trick_winner = self.__compare_cards(p1_card, p2_card)
             if trick_winner == 1:
@@ -63,9 +64,9 @@ class Spar:
                 temp = starting_player
                 starting_player = next_player
                 next_player = temp
-        print("")
-        print("-" * 75)
-        print("")
+            print("")
+            print("")
+        
         print(border_text(f"{starting_player.name} WON SET", 75))
         print(f"GAME OVER!!")
 
