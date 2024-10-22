@@ -1,4 +1,5 @@
-from constants import MAX_CARDS_PER_PLAYER
+from constants import MAX_CARDS_PER_PLAYER, CPU_PLAYER_NAME
+import random
 
 class Player:
     def __init__(self, name):
@@ -19,11 +20,15 @@ class Player:
         print(all_cards_str)
     
     def play_card(self):
-        self.show_hand()
-        card_index = int(input("Pick card: "))
-        if card_index > len(self.hand) or card_index < 1:
-            raise IndexError("Card index out of bounds")
-        played_card = self.hand.pop(card_index - 1)
+        if self.name == CPU_PLAYER_NAME:
+            card_index = random.randint(0, len(self.hand) - 1)
+            played_card = self.hand.pop(card_index - 1)
+        else:
+            self.show_hand()
+            card_index = int(input("Pick card: "))
+            if card_index > len(self.hand) or card_index < 1:
+                raise IndexError("Card index out of bounds")
+            played_card = self.hand.pop(card_index - 1)
         print(f"{self.name} played {played_card[1]} of {played_card[0]}")
         return played_card
 
