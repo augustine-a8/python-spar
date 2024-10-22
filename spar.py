@@ -1,4 +1,5 @@
 from constants import SUITS, RANKS, CPU_PLAYER_NAME
+from format_text import border_text
 from player import Player
 import random
 
@@ -54,14 +55,18 @@ class Spar:
             p2_card = next_player.play_card()
             trick_winner = self.__compare_cards(p1_card, p2_card)
             if trick_winner == 1:
-                print(f"{starting_player.name} won turn with {p1_card[1]} of {p1_card[0]}")
+                msg = f"{starting_player.name} won turn with {p1_card[1]} of {p1_card[0]}"
+                print(border_text(msg, 75))
             else:
-                print(f"{next_player.name} won turn with {p2_card[1]} of {p2_card[0]}")
+                msg = f"{next_player.name} won turn with {p2_card[1]} of {p2_card[0]}"
+                print(border_text(msg, 75))
                 temp = starting_player
                 starting_player = next_player
                 next_player = temp
-        
-        print(f"{starting_player.name} WON SET")
+        print("")
+        print("-" * 75)
+        print("")
+        print(border_text(f"{starting_player.name} WON SET", 75))
         print(f"GAME OVER!!")
 
     def __compare_cards(self, card_one, card_two):
